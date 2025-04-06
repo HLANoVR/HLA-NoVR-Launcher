@@ -69,7 +69,6 @@ text = "Options"
 
 [node name="ButtonAddons" type="Button" parent="Content/VBoxContainerMainMenu"]
 layout_mode = 2
-disabled = true
 text = "Addons"
 
 [node name="ButtonQuitGame" type="Button" parent="Content/VBoxContainerMainMenu"]
@@ -159,6 +158,10 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "Workshop"
 
+[node name="ButtonGuide" type="Button" parent="Content/VBoxContainerAddons/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "NoVR branch mods"
+
 [node name="ColorRectSeparator" type="ColorRect" parent="Content/VBoxContainerAddons/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
@@ -166,6 +169,38 @@ color = Color(0.45098, 0.34902, 0.0392157, 1)
 
 [node name="VBoxContainerButtons" type="VBoxContainer" parent="Content/VBoxContainerAddons/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="ButtonLevitation" type="Button" parent="Content/VBoxContainerAddons/ScrollContainer/VBoxContainer/VBoxContainerButtons"]
+layout_mode = 2
+text = "Levitation"
+
+[node name="ButtonExtraOrdinaryValue" type="Button" parent="Content/VBoxContainerAddons/ScrollContainer/VBoxContainer/VBoxContainerButtons"]
+layout_mode = 2
+text = "Extra-Ordinary Value"
+
+[node name="ButtonBelomorskayaStation" type="Button" parent="Content/VBoxContainerAddons/ScrollContainer/VBoxContainer/VBoxContainerButtons"]
+layout_mode = 2
+text = "Belomorskaya Station"
+
+[node name="ButtonOvercharge" type="Button" parent="Content/VBoxContainerAddons/ScrollContainer/VBoxContainer/VBoxContainerButtons"]
+layout_mode = 2
+text = "Overcharge"
+
+[node name="ButtonPostHuman" type="Button" parent="Content/VBoxContainerAddons/ScrollContainer/VBoxContainer/VBoxContainerButtons"]
+layout_mode = 2
+text = "Post-Human"
+
+[node name="ButtonBuckshotBugs" type="Button" parent="Content/VBoxContainerAddons/ScrollContainer/VBoxContainer/VBoxContainerButtons"]
+layout_mode = 2
+text = "Buckshot Bugs"
+
+[node name="ButtonReEducation" type="Button" parent="Content/VBoxContainerAddons/ScrollContainer/VBoxContainer/VBoxContainerButtons"]
+layout_mode = 2
+text = "Re-Education"
+
+[node name="ButtonLocomotive" type="Button" parent="Content/VBoxContainerAddons/ScrollContainer/VBoxContainer/VBoxContainerButtons"]
+layout_mode = 2
+text = "Loco-motive"
 
 [node name="ControlBottomRightCorner" type="Control" parent="Content/VBoxContainerAddons"]
 layout_mode = 2
@@ -1645,6 +1680,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_dl8s3")
 [connection signal="pressed" from="Content/VBoxContainerMainMenu/ButtonAddons" to="Content/VBoxContainerAddons" method="show"]
 [connection signal="pressed" from="Content/VBoxContainerMainMenu/ButtonQuitGame" to="." method="_on_button_quit_game_pressed"]
 [connection signal="pressed" from="Content/VBoxContainerAddons/ScrollContainer/VBoxContainer/ButtonWorkshop" to="." method="_on_button_workshop_pressed"]
+[connection signal="pressed" from="Content/VBoxContainerAddons/ScrollContainer/VBoxContainer/ButtonGuide" to="." method="_on_button_guide_pressed"]
 [connection signal="pressed" from="Content/VBoxContainerAddons/ButtonBack" to="Content/VBoxContainerMainMenu" method="show"]
 [connection signal="pressed" from="Content/VBoxContainerAddons/ButtonBack" to="Content/VBoxContainerAddons" method="hide"]
 [connection signal="pressed" from="Content/VBoxContainerGames/ButtonBack" to="Content/VBoxContainerMainMenu" method="show"]
@@ -1656,7 +1692,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_dl8s3")
 [connection signal="pressed" from="Content/VBoxContainerStartNewGame/ScrollContainer/VBoxContainer/ButtonDifficulty" to="." method="_on_button_difficulty_pressed"]
 [connection signal="pressed" from="Content/VBoxContainerStartNewGame/ScrollContainer/VBoxContainer/ButtonDevCommentary" to="." method="_on_button_dev_commentary_pressed"]
 [connection signal="pressed" from="Content/VBoxContainerStartNewGame/ScrollContainer/VBoxContainer/VBoxContainerButtons/ButtonStartGame" to="." method="_on_button_start_game_pressed"]
-[connection signal="pressed" from="Content/VBoxContainerStartNewGame/ButtonBack" to="Content/VBoxContainerSelectChapter" method="show"]
+[connection signal="pressed" from="Content/VBoxContainerStartNewGame/ButtonBack" to="." method="_on_button_back_pressed"]
 [connection signal="pressed" from="Content/VBoxContainerStartNewGame/ButtonBack" to="Content/VBoxContainerStartNewGame" method="hide"]
 [connection signal="pressed" from="Content/VBoxContainerOptions/ScrollContainer/VBoxContainerButtons/ButtonDifficulty" to="." method="_on_button_difficulty_pressed"]
 [connection signal="pressed" from="Content/VBoxContainerOptions/ScrollContainer/VBoxContainerButtons/ButtonMouse" to="Content/VBoxContainerOptions" method="hide"]
