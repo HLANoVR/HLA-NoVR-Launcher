@@ -1,4 +1,5 @@
 .godot
+.vscode
 *.exe
 *.zip
 *.dll

@@ -19,6 +19,28 @@ const CHAPTER_MAPS = [
 	"a5_vault",
 ]
 
+const ADDON_MAPS = [
+	"01_intro", # Levitation
+	"youreawake", # Extra-Ordinary Value
+	"belomorskaya", # Belomorskaya Station
+	"mc1_higgue", # Overcharge
+	"post-human_intro", # Post-Human
+	"buckshot_bugs", # Buckshot Bugs
+	"re-education", # Re-Education
+	"locomotive", # Loco-motive
+]
+
+const ADDON_WORKSHOP_IDS = [
+	"2880785403,2883987737,2883990019,2883993586,2884416378", # Levitation
+	"2938438773", # Extra-Ordinary Value
+	"2110621864", # Belomorskaya Station
+	"2113083464", # Overcharge
+	"2951332188", # Post-Human
+	"3086502947", # Buckshot Bugs
+	"2944449326", # Re-Education
+	"2212946578", # Loco-motive
+]
+
 @onready var content: Control = $Content
 @onready var vbox_main_menu: VBoxContainer = $Content/VBoxContainerMainMenu
 @onready var vbox_select_chapter: VBoxContainer = $Content/VBoxContainerSelectChapter
@@ -54,6 +76,7 @@ const CHAPTER_MAPS = [
 @onready var vbox_options: VBoxContainer = $Content/VBoxContainerOptions
 @onready var button_continue: Button = $Content/VBoxContainerMainMenu/ButtonContinue
 @onready var vbox_addons_buttons: VBoxContainer = $Content/VBoxContainerAddons/ScrollContainer/VBoxContainer/VBoxContainerButtons
+@onready var vbox_addons: VBoxContainer = $Content/VBoxContainerAddons
 
 var launcher: Launcher
 var remapping_input := false
@@ -66,7 +89,9 @@ var subtitles := 0
 var graphics_preset := 0
 var light_sensitivity_mode := false
 var selected_chapter: int
+var selected_addon: int
 var pause_menu_mode := false
+var addon_selected := false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -82,13 +107,25 @@ func _ready() -> void:
 		)
 	for button: Button in vbox_start_new_game_slot_buttons.get_children():
 		button.pressed.connect(func():
-			send_game_command("save_set_subdirectory s%s;addon_play %s" % [button.get_index(), CHAPTER_MAPS[selected_chapter]])
+			if addon_selected == false:
+				send_game_command("save_set_subdirectory s%s;addon_play %s" % [button.get_index(), CHAPTER_MAPS[selected_chapter]])
+			else:
+				send_game_command("addon_enable %s" % ADDON_WORKSHOP_IDS[selected_addon])
+				send_game_command("save_set_subdirectory s%s;addon_play %s" % [button.get_index(), ADDON_MAPS[selected_addon]])
 		)
 	for button: Button in vbox_select_chapter_buttons.get_children():
 		button.pressed.connect(func():
 			vbox_start_new_game.show()
 			vbox_select_chapter.hide()
 			selected_chapter = button.get_index()
+			addon_selected = false
+		)
+	for button: Button in vbox_addons_buttons.get_children(): # Workshop/Addons
+		button.pressed.connect(func():
+			vbox_start_new_game.show()
+			vbox_addons.hide()
+			selected_addon = button.get_index()
+			addon_selected = true
 		)
 	var bindings := FileAccess.open(launcher.installation_path + "/game/hlvr/scripts/vscripts/bindings.lua", FileAccess.READ)
 	if bindings:
@@ -419,6 +456,14 @@ func _on_button_light_sensitivity_mode_pressed() -> void:
 func _on_button_start_game_pressed() -> void:
 	vbox_start_new_game_slot.show()
 
+func _on_button_back_pressed() -> void:
+	if addon_selected:
+		vbox_addons.show()
+	else:
+		vbox_select_chapter.show()
 
 func _on_button_workshop_pressed() -> void:
 	OS.shell_open("steam://url/SteamWorkshopPage/546560")
+
+func _on_button_guide_pressed() -> void:
+	OS.shell_open("https://github.com/HLANoVR/HLA-NoVR/tree/mods")
