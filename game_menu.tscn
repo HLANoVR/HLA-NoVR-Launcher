@@ -554,7 +554,7 @@ layout_mode = 2
 
 [node name="ButtonChapter1" type="Button" parent="Content/VBoxContainerSelectChapter/ScrollContainer/VBoxContainer/VBoxContainerButtons"]
 layout_mode = 2
-text = "Chapter 1: Entaglement"
+text = "Chapter 1: Entanglement"
 
 [node name="ButtonChapter2" type="Button" parent="Content/VBoxContainerSelectChapter/ScrollContainer/VBoxContainer/VBoxContainerButtons"]
 layout_mode = 2
