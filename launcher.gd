@@ -12,7 +12,7 @@ const GAME_MENU_SCENE = preload("res://game_menu.tscn")
 const ICON_MUTE = preload("res://icons/mute.svg")
 const ICON_VOLUME = preload("res://icons/volume.svg")
 const GITHUB_USER = "HLANoVR"
-const VALID_BRANCHES = ["main", "mods", "steam_deck", "next"]
+const VALID_BRANCHES = ["main", "mods", "steam_deck", "next", "previous_release", "mods_previous_release", "steam_deck_previous_release"]
 
 @onready var config = ConfigFile.new()
 @onready var mod_branch: LineEdit = $Content/VBoxContainer2/LineEditModBranch
@@ -315,7 +315,7 @@ func _on_button_play_pressed() -> void:
 
 	# Check for valid mod branch value
 	if not mod_branch.text in VALID_BRANCHES and not OS.get_cmdline_args().has("-debug"):
-		accept_dialog.dialog_text = "Invalid branch name. Please set Mod branch to 'main', 'mods' or 'steam_deck'"
+		accept_dialog.dialog_text = "Invalid branch name. Please set Mod branch to 'main', 'mods', 'previous_release', 'mods_previous_release' or 'steam_deck'"
 		accept_dialog.show()
 		return
 
